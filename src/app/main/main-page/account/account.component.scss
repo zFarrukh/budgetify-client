@@ -1,0 +1,25 @@
+.account-container {
+  .account {
+    margin: 0 1rem 1rem;
+    cursor: pointer;
+    &__card {
+      padding: 2.5rem 1.5rem;
+      background-image: linear-gradient(
+        to bottom right,
+        #f98484,
+        #e9aad6,
+        #a5f0ff
+      );
+      color: #fff;
+
+      &.selected {
+        background-image: linear-gradient(
+          to bottom right,
+          #f04b4b,
+          #f26eca,
+          #5ed9f2
+        );
+      }
+    }
+  }
+}

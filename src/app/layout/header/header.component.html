@@ -1,0 +1,35 @@
+<header class="header">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile colspan="1">
+      <h3 class="header__logo">
+        <a routerLink="/" class="header__logo-link">Budgetify</a>
+      </h3>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <nav class="navbar">
+        <ul class="navbar__nav">
+          <li class="navbar__item">
+            <a routerLink="/category" class="navbar__link">Categories</a>
+          </li>
+          <li class="navbar__item">
+            <a routerLink="/statistics" class="navbar__link">Statistics</a>
+          </li>
+          <li class="navbar__item" *ngIf="isAdmin">
+            <a routerLink="/admin" class="navbar__link">Admin</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <button
+        mat-icon-button
+        aria-label="Example icon button with a open in new tab icon"
+        class="header__logout-button"
+        (click)="logout()"
+      >
+        <span>Log Out</span>
+        <mat-icon class="header__logout-icon">open_in_new</mat-icon>
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</header>

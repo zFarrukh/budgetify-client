@@ -1,0 +1,45 @@
+.account {
+  &__sidenav {
+    position: fixed;
+  }
+
+  &__content {
+    padding: 2rem 3rem;
+    width: 40vw;
+    z-index: 100;
+  }
+
+  &__header-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-group {
+    display: flex;
+    align-items: center;
+    button {
+      border: none;
+      background-color: inherit;
+      color: #000;
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__icon {
+    border-radius: 50%;
+    color: white;
+    margin-right: 0.5rem;
+  }
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: black;
+  width: 100vw;
+  z-index: 1;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}

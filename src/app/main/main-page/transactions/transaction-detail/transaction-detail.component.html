@@ -1,0 +1,57 @@
+<div class="transaction__content" *ngIf="transaction">
+  <div class="transaction__header">
+    <div class="transaction__header-title">
+      <h1>Transaction Information</h1>
+      <div class="transaction__button-group">
+        <button (click)="onEditTransaction()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="openDialog()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button (click)="onClose()"><mat-icon>close</mat-icon></button>
+      </div>
+    </div>
+    <div class="transaction__amount">
+      <div *ngIf="transaction.type == 'income'" class="transaction__type">
+        <mat-icon class="transaction__icon income">arrow_downward</mat-icon>
+        <span>Income</span>
+      </div>
+      <div *ngIf="transaction.type == 'expense'" class="transaction__type">
+        <mat-icon class="transaction__icon expense">arrow_upward</mat-icon>
+        <span>Expense</span>
+      </div>
+      <div [ngClass]="'amount-' + transaction.type">
+        {{ transaction.amount.toFixed(2) }} {{ currency }}
+      </div>
+    </div>
+  </div>
+
+  <div class="transaction__body">
+    <div class="transaction__body-title">
+      <h2>{{ transaction.title }}</h2>
+    </div>
+    <div>
+      <div
+        class="transaction__category"
+        *ngFor="let categoryTitle of transaction.category"
+      >
+        {{ categoryTitle }}
+      </div>
+    </div>
+    <div class="transaction__table">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Payment Date:</th>
+            <td>{{ transaction.date_of_creation | date: 'dd.MM.yyyy' }}</td>
+          </tr>
+          <tr *ngIf="transaction.description">
+            <th scope="row">Description</th>
+            <td>{{ transaction.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

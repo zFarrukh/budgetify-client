@@ -1,0 +1,66 @@
+<div class="account__content" *ngIf="open">
+  <div class="account__header">
+    <div class="account__header-title">
+      <h1>{{ isEditMode ? 'Edit account' : 'Add account' }}</h1>
+      <div class="account__button-group">
+        <button (click)="onClose()"><mat-icon>close</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="account__body">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+      <div>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Title" formControlName="title" />
+          <mat-error *ngIf="accountForm.controls['title'].invalid"
+            >Please enter a title</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Select</mat-label>
+          <mat-select formControlName="currency">
+            <mat-option
+              *ngFor="let currency of currencies"
+              [value]="currency.code"
+              >{{ currency.code }}({{ currency.symbol }})</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="!isEditMode">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Amount"
+            formControlName="amount"
+            type="number"
+          />
+          <mat-error *ngIf="accountForm.controls['amount'].invalid"
+            >Please enter an amount</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="accountForm.invalid"
+        >
+          {{ isEditMode ? 'Edit' : 'Add' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

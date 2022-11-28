@@ -1,0 +1,21 @@
+<div class="category" [ngClass]="category.type">
+  <form [formGroup]="categoryForm">
+    <input
+      class="category__title"
+      formControlName="title"
+      [class.edit]="isEditMode"
+    />
+  </form>
+
+  <div class="category__button-group">
+    <button *ngIf="!isEditMode" (click)="onEditMode()">
+      <mat-icon class="category__icon">edit</mat-icon>
+    </button>
+    <button *ngIf="isEditMode" (click)="onUpdateCategory()">
+      <mat-icon class="category__icon">check</mat-icon>
+    </button>
+    <button (click)="openDialog(category._id)">
+      <mat-icon class="category__icon">delete</mat-icon>
+    </button>
+  </div>
+</div>

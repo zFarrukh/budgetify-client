@@ -1,0 +1,26 @@
+.stats__select-type {
+  button {
+    opacity: 0.5;
+    background-color: inherit;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+  }
+  button.active {
+    opacity: 1;
+  }
+}
+
+.stats {
+  &__monthly {
+    margin-top: 2rem;
+  }
+  &__category {
+    margin-top: 2rem;
+  }
+
+  &__date-picker {
+    margin-top: 1rem;
+    width: 100%;
+  }
+}

@@ -1,0 +1,115 @@
+<div class="transactions-container">
+  <div class="row">
+    <div class="col-9">
+      <div class="transactions__wrapper">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Search Transaction</mat-label>
+              <mat-icon matSuffix>search</mat-icon
+              ><input
+                matInput
+                placeholder="Search"
+                [(ngModel)]="searchText"
+                (ngModelChange)="searchKey($event)"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="col-6">
+            <h2>Sort Transactions By Date</h2>
+            <button
+              (click)="sortTransactions('latest')"
+              class="btn btn-outline-success"
+            >
+              Latest
+            </button>
+            <button
+              (click)="sortTransactions('oldest')"
+              class="btn btn-outline-primary"
+            >
+              Oldest
+            </button>
+          </div>
+        </div>
+        <div *ngIf="isDeletedTransaction" class="transaction-removed">
+          Transaction was successfully deleted
+        </div>
+        <div
+          class="transaction"
+          *ngFor="let transaction of transactionsForOutput"
+          (click)="onSelectTransaction(transaction)"
+        >
+          <div class="transaction__category">
+            <span>{{ transaction.category[0] | uppercase }}</span>
+          </div>
+          <div class="transaction__content">
+            <div class="transaction__header">
+              <h2 class="transaction__title">{{ transaction.title }}</h2>
+              <span class="transaction__amount" [ngClass]="transaction.type"
+                >{{ transaction.amount.toFixed(2) }} {{ currency }}</span
+              >
+            </div>
+            <div class="transaction__footer">
+              <mat-icon
+                class="transaction__icon"
+                [ngClass]="transaction.type"
+                >{{
+                  transaction.type === 'expense'
+                    ? 'arrow_upward'
+                    : 'arrow_downward'
+                }}</mat-icon
+              >
+              <span>{{ transaction.type }}</span>
+              <span> {{ transaction.date_of_creation | date }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div
+        class="transaction__aside type"
+        (click)="onSelectTransactionsByType('income')"
+      >
+        <mat-icon class="transaction__icon income">arrow_downward</mat-icon>
+        <span>Income</span>
+      </div>
+      <div
+        class="transaction__aside type"
+        (click)="onSelectTransactionsByType('expense')"
+      >
+        <mat-icon class="transaction__icon expense">arrow_upward</mat-icon>
+        <span>Expense</span>
+      </div>
+      <div class="transaction__aside add">
+        <button
+          type="button"
+          class="transaction__add-button"
+          (click)="openAddTransaction()"
+        >
+          <mat-icon class="transaction__icon">add</mat-icon></button
+        ><span>Add Transaction</span>
+      </div>
+      <div class="transaction__aside add">
+        <button
+          type="button"
+          class="transaction__add-button"
+          (click)="openAddAccount()"
+        >
+          <mat-icon class="transaction__icon">add</mat-icon></button
+        ><span>Add Account</span>
+      </div>
+      <div class="transaction__aside add" *ngIf="selectedAccount">
+        <button
+          type="button"
+          class="transaction__add-button"
+          (click)="openAccountDetail()"
+        >
+          <mat-icon class="transaction__icon">add</mat-icon></button
+        ><span>Account Detail</span>
+      </div>
+    </div>
+  </div>
+</div>

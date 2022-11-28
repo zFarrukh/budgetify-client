@@ -1,0 +1,165 @@
+<app-header></app-header>
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-9">
+        <div class="stats__container">
+          <div class="stats__select-type">
+            <button
+              [ngClass]="isCategoryStatistics ? 'active' : ''"
+              (click)="showCategoryStatistics()"
+            >
+              Expense Category Statistics
+            </button>
+            <button
+              [ngClass]="!isCategoryStatistics ? 'active' : ''"
+              (click)="showMonthlyStatistics()"
+            >
+              Monthly Statistics
+            </button>
+          </div>
+          <div class="stats">
+            <form [formGroup]="range" (submit)="fetchData()">
+              <mat-form-field appearance="fill" class="stats__date-picker">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input
+                    matStartDate
+                    placeholder="Start date"
+                    formControlName="start"
+                  />
+                  <input
+                    matEndDate
+                    placeholder="End date"
+                    formControlName="end"
+                  />
+                </mat-date-range-input>
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+              <button type="submit" [disabled]="!range.valid">
+                Fetch data
+              </button>
+            </form>
+
+            <div class="stats__monthly" *ngIf="!isCategoryStatistics">
+              <div
+                *ngFor="
+                  let monthlyStatistics of monthlyAdminStatistics | keyvalue
+                "
+              >
+                <div *ngIf="!monthlyStatistics.value">
+                  No Statistics to show
+                </div>
+                <table class="table" *ngIf="monthlyStatistics.value.length > 0">
+                  <caption>
+                    {{
+                      monthlyStatistics.key
+                    }}
+                  </caption>
+                  <thead>
+                    <tr class="table-success">
+                      <th>Month</th>
+                      <th>Income</th>
+                      <th>Expense</th>
+                      <th>Economy</th>
+                      <th>% of Economy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let monthlyStat of monthlyStatistics.value">
+                      <td>{{ monthlyStat.month }}</td>
+                      <td>{{ monthlyStat.income }}</td>
+                      <td>{{ monthlyStat.expense }}</td>
+                      <td>{{ monthlyStat.economy }}</td>
+                      <td>{{ monthlyStat.economy_percentage }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot *ngIf="total">
+                    <tr>
+                      <th>Total:</th>
+                      <th>
+                        {{ total[monthlyStatistics.key].income.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{ total[monthlyStatistics.key].expense.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{ total[monthlyStatistics.key].economy.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{
+                          total[
+                            monthlyStatistics.key
+                          ].economy_percentage.toFixed(2)
+                        }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Average:</th>
+                      <th>
+                        {{ average[monthlyStatistics.key].income.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{ average[monthlyStatistics.key].expense.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{ average[monthlyStatistics.key].economy.toFixed(2) }}
+                      </th>
+                      <th>
+                        {{
+                          average[
+                            monthlyStatistics.key
+                          ].economy_percentage.toFixed(2)
+                        }}
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div class="stats__category" *ngIf="isCategoryStatistics">
+              <div
+                *ngFor="
+                  let categoryStatistics of categoryAdminStatistics | keyvalue
+                "
+              >
+                <div *ngIf="!categoryStatistics.value.length">
+                  No Statistics to show
+                </div>
+                <table
+                  class="table"
+                  *ngIf="categoryStatistics.value.length > 0"
+                >
+                  <caption>
+                    {{
+                      categoryStatistics.key
+                    }}
+                  </caption>
+                  <thead>
+                    <tr class="table-success">
+                      <th>Category</th>
+                      <th>Amount</th>
+                      <th>% in total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let categoryStat of categoryStatistics.value">
+                      <td>{{ categoryStat.category }}</td>
+                      <td>{{ categoryStat.amount }}</td>
+                      <td>{{ categoryStat.percentage }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="account-container">
+  <div class="account" *ngFor="let account of accounts">
+    <mat-card
+      class="account__card"
+      (click)="selectAccount(account)"
+      [ngClass]="selectedAccount === account ? 'selected' : ''"
+    >
+      <mat-card-title>{{ account.title }}</mat-card-title>
+      <mat-card-content>
+        <p>
+          {{ account.amount }}
+          <span>
+            {{ account.currency }}
+          </span>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

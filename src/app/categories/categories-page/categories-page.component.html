@@ -1,0 +1,60 @@
+<div
+  class="alert alert-danger position-fixed end-0 d-flex m-5"
+  role="alert"
+  *ngIf="isError"
+>
+  <p>{{ errorMessage }}</p>
+</div>
+<mat-drawer-container [hasBackdrop]="true" CdkScrollable>
+  <mat-drawer
+    #drawer
+    class="category__sidenav"
+    mode="over"
+    position="end"
+    [opened]="open"
+    [disableClose]="true"
+    (openedChange)="openedChanged($event)"
+  >
+    <app-category-add (addCategory)="onAddCategory($event)"></app-category-add>
+  </mat-drawer>
+  <mat-drawer-content class="mat-drawer-content">
+    <app-header></app-header>
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <div class="categories-container">
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Search Categories</mat-label>
+                <mat-icon matSuffix>search</mat-icon
+                ><input
+                  matInput
+                  placeholder="Search"
+                  [ngModel]="searchText"
+                  (ngModelChange)="searchKey($event)"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+
+            <app-category-item
+              *ngFor="let category of categoriesForOutput"
+              [category]="category"
+              (delete)="onDeleteCategory($event)"
+              (update)="onUpdateCategory($event)"
+            ></app-category-item>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="category__aside add">
+            <button type="button" class="category__add-button">
+              <mat-icon class="category__icon" (click)="drawer.open()"
+                >add</mat-icon
+              ></button
+            ><span>Add Category</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,87 @@
+.category {
+  &__sidenav {
+    position: fixed;
+    width: 40vw;
+    z-index: 100;
+    background-color: #fff;
+  }
+  &__content {
+    padding: 2rem 3rem;
+  }
+
+  &__header-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-group {
+    display: flex;
+    align-items: center;
+    button {
+      border: none;
+      background-color: inherit;
+      color: #000;
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0;
+    font-size: 1.3rem;
+
+    .amount-expense {
+      color: #ee3f19;
+      font-weight: 700;
+    }
+    .amount-income {
+      color: #21c206;
+      font-weight: 700;
+    }
+
+    .amount-expense::before {
+      content: '-';
+    }
+  }
+  &__type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    border-radius: 50%;
+    color: white;
+    margin-right: 0.5rem;
+
+    &.expense {
+      background-color: #ee3f19;
+    }
+    &.income {
+      background-color: #21c206;
+    }
+  }
+
+  &__category {
+    padding: 1rem 2rem;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    display: inline-block;
+    margin: 1rem 0;
+  }
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}

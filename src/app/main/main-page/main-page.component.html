@@ -1,0 +1,35 @@
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer-content>
+    <app-header></app-header>
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <app-account></app-account>
+        </div>
+        <div class="col-9">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </mat-drawer-content>
+  <mat-drawer
+    #drawer
+    [opened]="isOpen"
+    position="end"
+    (openedChange)="openChange($event)"
+    [disableClose]="true"
+  >
+    <app-transaction-detail
+      [currency]="currency"
+      (deletedTransaction)="onDeleteTransaction($event)"
+    ></app-transaction-detail>
+    <app-transaction-edit
+      (addTransaction)="addTransaction($event)"
+      (updateTransaction)="updateTransaction($event)"
+    >
+    </app-transaction-edit>
+
+    <app-account-edit (addAccount)="addAccount($event)"></app-account-edit>
+    <app-account-detail></app-account-detail>
+  </mat-drawer>
+</mat-drawer-container>

@@ -1,0 +1,46 @@
+.category {
+  &__sidenav {
+    position: fixed;
+    width: 40vw;
+  }
+  &__aside {
+    display: flex;
+    align-items: center;
+    width: 12rem;
+    margin-bottom: 1rem;
+    &.type {
+      background-color: #fff;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+    .transaction__icon {
+      margin-right: 1rem;
+    }
+
+    &.add {
+      background-color: #b9e2e6;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+  }
+  &__add-button {
+    border: none;
+    background-color: inherit;
+    cursor: default;
+
+    .category__icon {
+      cursor: pointer;
+      border-radius: 50%;
+      color: #b9e2e6;
+      background-color: #fff;
+    }
+  }
+}
+
+.mat-drawer-content {
+  min-height: 100vh;
+}
+
+.mat-drawer-container {
+  background-color: inherit;
+}

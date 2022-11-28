@@ -1,0 +1,50 @@
+.category {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+
+  &.expense {
+    border: 2px solid #f00;
+  }
+  &.income {
+    border: 2px solid #0f0;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    border: none;
+    border-bottom: 1px solid #eceded;
+    background: inherit;
+    width: 120px;
+
+    &.edit {
+      border-bottom: 1px solid #000000;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button-group {
+    display: flex;
+    align-items: center;
+
+    button {
+      border: none;
+      background-color: inherit;
+      &:hover {
+        background-color: #f4f4f4;
+      }
+      .category__icon {
+        background-color: inherit;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+.transaction {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  padding: 0.8rem;
+  cursor: pointer;
+
+  &__category {
+    padding: 1.5rem 2rem;
+    background-color: #eceded;
+    margin: 0.5rem 2rem;
+    border-radius: 5px;
+  }
+  &__content {
+    flex: 1;
+  }
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  &__amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00a8ff;
+    &.expense {
+      color: #ee3f19;
+    }
+    &.income {
+      color: #21c206;
+    }
+
+    &.expense::before {
+      content: '-';
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #8c8c8c;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 50%;
+    color: white;
+    &.expense {
+      background-color: #ee3f19;
+    }
+    &.income {
+      background-color: #21c206;
+    }
+  }
+
+  &__aside {
+    display: flex;
+    align-items: center;
+    width: 12rem;
+    margin-bottom: 1rem;
+    &.type {
+      background-color: #fff;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+    .transaction__icon {
+      margin-right: 1rem;
+    }
+
+    &.add {
+      background-color: #b9e2e6;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+  }
+  &__add-button {
+    border: none;
+    background-color: inherit;
+    cursor: default;
+
+    .transaction__icon {
+      cursor: pointer;
+      border-radius: 50%;
+      color: #b9e2e6;
+      background-color: #fff;
+    }
+  }
+}
+
+.transaction-removed {
+  background-color: #1aa103;
+  color: #fff;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+}

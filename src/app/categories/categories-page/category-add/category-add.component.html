@@ -1,0 +1,52 @@
+<div class="category__sidenav">
+  <div class="category__content">
+    <div class="category__header">
+      <div class="category__header-title">
+        <h1>Add Category</h1>
+        <div class="category__button-group">
+          <button (click)="onClose()"><mat-icon>close</mat-icon></button>
+        </div>
+      </div>
+    </div>
+    <div class="category__body">
+      <form
+        [formGroup]="categoryForm"
+        (ngSubmit)="onAddCategory(formDirective)"
+        #formDirective="ngForm"
+      >
+        <div>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="type"
+            (ngModelChange)="changeType($event)"
+          >
+            <mat-radio-button value="expense">Expense</mat-radio-button>
+            <mat-radio-button value="income">Income</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Title" formControlName="title" />
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="categoryForm.invalid"
+            type="submit"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <mat-sidenav-container>
+  <mat-sidenav side="end">
+    <ng-content select="my-sidenav-content"></ng-content>
+  </mat-sidenav>
+  <ng-content select="my-main-content"></ng-content>
+</mat-sidenav-container> -->

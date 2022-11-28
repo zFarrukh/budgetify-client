@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div class="stats__container">
+        <div class="stats__select-type">
+          <button
+            [ngClass]="isCategoryStatistics ? 'active' : ''"
+            (click)="showCategoryStatistics()"
+          >
+            Expense Category Statistics
+          </button>
+          <button
+            [ngClass]="!isCategoryStatistics ? 'active' : ''"
+            (click)="showMonthlyStatistics()"
+          >
+            Monthly Statistics
+          </button>
+        </div>
+        <div class="stats">
+          <form [formGroup]="range" (submit)="fetchData()">
+            <mat-form-field appearance="fill" class="stats__date-picker">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input
+                  matStartDate
+                  placeholder="Start date"
+                  formControlName="start"
+                />
+                <input
+                  matEndDate
+                  placeholder="End date"
+                  formControlName="end"
+                />
+              </mat-date-range-input>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <button type="submit" [disabled]="!range.valid">Fetch data</button>
+          </form>
+
+          <div class="stats__monthly" *ngIf="!isCategoryStatistics">
+            <div *ngIf="monthlyStatistics.length === 0">
+              No Statistics to show
+            </div>
+            <table class="table" *ngIf="monthlyStatistics.length > 0">
+              <thead>
+                <tr class="table-success">
+                  <th>Month</th>
+                  <th>Income</th>
+                  <th>Expense</th>
+                  <th>Economy</th>
+                  <th>% of Economy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let monthlyStat of monthlyStatistics">
+                  <td>{{ monthlyStat.month }}</td>
+                  <td>{{ monthlyStat.income }}</td>
+                  <td>{{ monthlyStat.expense }}</td>
+                  <td>{{ monthlyStat.economy }}</td>
+                  <td>{{ monthlyStat.economy_percentage }}</td>
+                </tr>
+              </tbody>
+              <tfoot *ngIf="total">
+                <tr>
+                  <th>Total:</th>
+                  <th>{{ total.income.toFixed(2) }}</th>
+                  <th>{{ total.expense.toFixed(2) }}</th>
+                  <th>{{ total.economy.toFixed(2) }}</th>
+                  <th>{{ total.economy_percentage.toFixed(2) }}</th>
+                </tr>
+                <tr>
+                  <th>Average:</th>
+                  <th>{{ average.income.toFixed(2) }}</th>
+                  <th>{{ average.expense.toFixed(2) }}</th>
+                  <th>{{ average.economy.toFixed(2) }}</th>
+                  <th>{{ average.economy_percentage.toFixed(2) }}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="stats__category" *ngIf="isCategoryStatistics">
+            <div *ngIf="categoryStatistics.length === 0">
+              No Statistics to show
+            </div>
+            <table class="table" *ngIf="categoryStatistics.length > 0">
+              <thead>
+                <tr class="table-success">
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>% in total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let categoryStat of categoryStatistics">
+                  <td>{{ categoryStat.category }}</td>
+                  <td>{{ categoryStat.amount }}</td>
+                  <td>{{ categoryStat.percentage }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
