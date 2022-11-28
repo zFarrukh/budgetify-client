@@ -27,7 +27,7 @@ import { LayoutModule } from './layout/layout.module';
         tokenGetter: () => {
           return localStorage.getItem('token');
         },
-        allowedDomains: ['localhost:3000'],
+        allowedDomains: ['localhost:3000', 'budgetify-api.onrender.com'],
       },
     }),
     AppRoutingModule,
